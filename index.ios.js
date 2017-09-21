@@ -9,9 +9,12 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
+  TextInput,
   View
 } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+// import SearchBox from SearchBox;
+
 
 export default class CatCallOutApp extends Component {
   render() {
@@ -25,7 +28,13 @@ export default class CatCallOutApp extends Component {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-      />
+      >
+        <TextInput
+          placeholder="Where to?"
+          
+        />
+      </MapView>
+
     );
   }
 }
