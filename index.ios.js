@@ -17,6 +17,21 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 
 export default class CatCallOutApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      locationInput: ''
+    };
+
+    this.handleLocationInput = this.handleLocationInput.bind(this);
+  }
+
+  handleLocationInput(textInput) {
+    this.setState({
+      locationInput: textInput
+    });
+  }
+
   render() {
     return (
       <MapView
@@ -29,10 +44,14 @@ export default class CatCallOutApp extends Component {
           longitudeDelta: 0.0421,
         }}
       >
-        <TextInput
-          placeholder="Where to?"
-          
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Where to?"
+            style={ styles.input }
+            onChangeText={this.handleLocationInput}
+            value={this.state.locationInput}
+          />
+        </View>
       </MapView>
 
     );
@@ -43,6 +62,20 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%'
+  },
+  input: {
+    elevation: 1,
+    width: '99%',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  inputContainer: {
+    elevation: 1,
+    backgroundColor: 'white',
+    top: 50,
+    width: '70%'
   }
 });
 
