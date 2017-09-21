@@ -2,8 +2,11 @@
 #
 .DS_Store
 
+.env 
+
 # Xcode
 #
+ios/Constants.swift
 build/
 *.pbxuser
 !default.pbxuser

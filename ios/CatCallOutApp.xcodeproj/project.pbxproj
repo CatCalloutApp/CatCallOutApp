@@ -40,6 +40,7 @@
 		1433FEF71F7430CB0090A0D3 /* AIRGoogleMapURLTileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1433FEE21F7430CB0090A0D3 /* AIRGoogleMapURLTileManager.m */; };
 		1433FEF81F7430CB0090A0D3 /* DummyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1433FEE41F7430CB0090A0D3 /* DummyView.m */; };
 		1433FEF91F7430CB0090A0D3 /* RCTConvert+GMSMapViewType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1433FEE61F7430CB0090A0D3 /* RCTConvert+GMSMapViewType.m */; };
+		1433FF3E1F7437930090A0D3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1433FF3D1F7437930090A0D3 /* Constants.swift */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		167EBAB63A22845B5A2AAC43 /* libPods-CatCallOutApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C1FA5E4ACD4419219DA126 /* libPods-CatCallOutApp.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -358,6 +359,8 @@
 		1433FEE41F7430CB0090A0D3 /* DummyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyView.m; sourceTree = "<group>"; };
 		1433FEE51F7430CB0090A0D3 /* RCTConvert+GMSMapViewType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+GMSMapViewType.h"; sourceTree = "<group>"; };
 		1433FEE61F7430CB0090A0D3 /* RCTConvert+GMSMapViewType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+GMSMapViewType.m"; sourceTree = "<group>"; };
+		1433FF3C1F7437930090A0D3 /* CatCallOutApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CatCallOutApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		1433FF3D1F7437930090A0D3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* CatCallOutApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CatCallOutApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* CatCallOutApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CatCallOutApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -515,6 +518,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				1433FF3D1F7437930090A0D3 /* Constants.swift */,
+				1433FF3C1F7437930090A0D3 /* CatCallOutApp-Bridging-Header.h */,
 			);
 			name = CatCallOutApp;
 			sourceTree = "<group>";
@@ -782,6 +787,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 0830;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1226,6 +1234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1433FEEA1F7430CB0090A0D3 /* AIRGoogleMap.m in Sources */,
+				1433FF3E1F7437930090A0D3 /* Constants.swift in Sources */,
 				1433FEF91F7430CB0090A0D3 /* RCTConvert+GMSMapViewType.m in Sources */,
 				1433FEEF1F7430CB0090A0D3 /* AIRGoogleMapManager.m in Sources */,
 				1433FEF61F7430CB0090A0D3 /* AIRGoogleMapUrlTile.m in Sources */,
@@ -1297,6 +1306,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1325,6 +1335,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1352,6 +1363,7 @@
 			baseConfigurationReference = 63C22962AAB3790F4360A189 /* Pods-CatCallOutApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1367,6 +1379,9 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = CatCallOutApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "CatCallOutApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1376,6 +1391,7 @@
 			baseConfigurationReference = 4AC18275BCD1DF7BAAD68B22 /* Pods-CatCallOutApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1390,6 +1406,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = CatCallOutApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "CatCallOutApp-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
