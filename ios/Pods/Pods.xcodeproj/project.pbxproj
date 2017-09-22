@@ -463,7 +463,7 @@
 			};
 			name = Release;
 		};
-		A7375E527C78824BDE4803EA1F9BD77E /* Debug */ = {
+		618E33C4AD02E0EB396025D07DC8BFEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADA167F9B5EFE52C6BC169BAE2EA9501 /* Yoga.xcconfig */;
 			buildSettings = {
@@ -484,8 +484,34 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
+		};
+		BF2F542836DCE716D0A38C595996205A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADA167F9B5EFE52C6BC169BAE2EA9501 /* Yoga.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Yoga/Yoga-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
 		};
 		D7940AD7ACA25E5A24D54705DFEEC412 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -510,30 +536,6 @@
 			};
 			name = Debug;
 		};
-		FFF2E2BE7873EEB2A12B6A6AA538CC37 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADA167F9B5EFE52C6BC169BAE2EA9501 /* Yoga.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Yoga/Yoga-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -549,8 +551,8 @@
 		8938DEA797A11EBF287DAE86EAB317D0 /* Build configuration list for PBXNativeTarget "Yoga" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A7375E527C78824BDE4803EA1F9BD77E /* Debug */,
-				FFF2E2BE7873EEB2A12B6A6AA538CC37 /* Release */,
+				618E33C4AD02E0EB396025D07DC8BFEC /* Debug */,
+				BF2F542836DCE716D0A38C595996205A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
