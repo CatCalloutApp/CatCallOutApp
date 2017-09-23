@@ -27,6 +27,7 @@ export default class FormScreen extends Component {
 
   handleButtonSubmit(){
     console.log(this.state.report)
+    navigator.geolocation.getCurrentPosition((position) => {console.log(position)})
   }
 
   handleValueChange(value) {
