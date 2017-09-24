@@ -65,10 +65,11 @@ export default class MapScreen extends Component {
 
   render() {
     return (
+      <View style={styles.overallViewContainer}>
       <MapView
         provider={ PROVIDER_GOOGLE }
         style={ styles.container }
-        initialRegion={this.state.locationCoordinates}
+        region={this.state.locationCoordinates}
         zoomEnabled={true} 
         scrollEnabled={true} 
       >
@@ -78,6 +79,7 @@ export default class MapScreen extends Component {
             longitude: -122.4194,
           }}
         />
+        </MapView>
         <View style={styles.inputContainer}>
           <TextInput
             placeholder="Where to?"
@@ -92,13 +94,18 @@ export default class MapScreen extends Component {
           title="Report at my location"
           onPress={this.handleReport.bind(this)}
         />
-      </MapView>
+      </View>
 
     );
   }
 }
 
 const styles = StyleSheet.create({
+  overallViewContainer: {
+    position: 'absolute',
+    height: 650,
+    width: 500
+  },
   container: {
     position: 'absolute',
     top: 0,
