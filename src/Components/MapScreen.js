@@ -31,6 +31,7 @@ export default class MapScreen extends Component {
     };
 
     this.handleLocationInput = this.handleLocationInput.bind(this);
+    this.handleLocationChange = this.handleLocationChange.bind(this);
   }
 
   handleLocationInput(textInput) {
@@ -52,10 +53,18 @@ export default class MapScreen extends Component {
     })
   }
 
+
   handleSubmit(textInput) {
     axios.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.locationInput.split(' ').join('') + "&key=" + REACT_APP_GOOGLE_PLACES_API)
     .then(response => this.updateLocationCoordinates(response))
     .catch(error => console.log("Failjax: ", error))
+  }
+
+  handleLocationChange(response){
+    console.log('handleLocationChange: ', response)
+    this.setState({
+      locationCoordiante: response
+    })
   }
 
   handleReport() {
@@ -70,6 +79,7 @@ export default class MapScreen extends Component {
         provider={ PROVIDER_GOOGLE }
         style={ styles.container }
         region={this.state.locationCoordinates}
+        onRegionChange={this.handleLocationChange}
         zoomEnabled={true} 
         scrollEnabled={true} 
       >
@@ -80,20 +90,23 @@ export default class MapScreen extends Component {
           }}
         />
         </MapView>
+        <View style={styles.allNonMapThings}>
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder="Where to?"
+            placeholder=" Where to?"
             style={ styles.input }
             onChangeText={this.handleLocationInput}
             value={this.state.locationInput}
             onSubmitEditing={this.handleSubmit.bind(this)}
           />
         </View>
-        <Button 
-          style={styles.button}
-          title="Report at my location"
-          onPress={this.handleReport.bind(this)}
-        />
+        <View style={styles.button}>
+          <Button 
+            title="Call it out"
+            onPress={this.handleReport.bind(this)}
+          />
+        </View>
+        </View>
       </View>
 
     );
@@ -103,8 +116,8 @@ export default class MapScreen extends Component {
 const styles = StyleSheet.create({
   overallViewContainer: {
     position: 'absolute',
-    height: 650,
-    width: 500
+    height: '100%',
+    width: '100%',
   },
   container: {
     position: 'absolute',
@@ -122,20 +135,32 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 'auto',
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
+  },
+  allNonMapThings: {
+    alignItems: 'center',
+    borderColor: 'pink',
+    borderWidth: 2,
+    height: '100%',
+    width: '100%'
   },
   inputContainer: {
     elevation: 1,
     backgroundColor: 'white',
-    top: 50,
-    width: '70%'
+    width: '90%',
+    height: '6%',
+    top: 40,
+    shadowOpacity: 0.75,
+    shadowRadius: 1,
+    shadowColor: 'gray',
+    shadowOffset: { height: 0, width: 0}
   },
   button: {
     elevation: 1,
     alignSelf: 'flex-start',
     position: 'absolute',
-    bottom: 0,
-    left: 0
+    bottom: 20,
+    backgroundColor: 'red'
   },
   wrapper: {
     height: '100%',
