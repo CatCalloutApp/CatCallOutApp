@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   Button,
   View
 } from 'react-native';
@@ -91,21 +92,25 @@ export default class MapScreen extends Component {
         />
         </MapView>
         <View style={styles.allNonMapThings}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder=" Where to?"
-            style={ styles.input }
-            onChangeText={this.handleLocationInput}
-            value={this.state.locationInput}
-            onSubmitEditing={this.handleSubmit.bind(this)}
-          />
-        </View>
-        <View style={styles.button}>
-          <Button 
-            title="Call it out"
-            onPress={this.handleReport.bind(this)}
-          />
-        </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder=" Where to?"
+              style={ styles.input }
+              onChangeText={this.handleLocationInput}
+              value={this.state.locationInput}
+              onSubmitEditing={this.handleSubmit.bind(this)}
+            />
+          </View>
+
+          <View style={styles.button} >
+            <TouchableOpacity 
+              onPress={this.handleReport.bind(this)}
+            > 
+              <Text style = {styles.buttonText} >
+                Call it out 
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
 
@@ -139,8 +144,6 @@ const styles = StyleSheet.create({
   },
   allNonMapThings: {
     alignItems: 'center',
-    borderColor: 'pink',
-    borderWidth: 2,
     height: '100%',
     width: '100%'
   },
@@ -150,6 +153,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: '6%',
     top: 40,
+    borderRadius: 3,
     shadowOpacity: 0.75,
     shadowRadius: 1,
     shadowColor: 'gray',
@@ -157,10 +161,24 @@ const styles = StyleSheet.create({
   },
   button: {
     elevation: 1,
-    alignSelf: 'flex-start',
     position: 'absolute',
-    bottom: 20,
-    backgroundColor: 'red'
+    bottom: 25,
+    backgroundColor: '#ff6600',
+    borderRadius: 10,
+    width: '60%',
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowOpacity: 0.75,
+    shadowRadius: 1,
+    shadowColor: 'gray',
+    shadowOffset: { height: 0, width: 0}
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+
   },
   wrapper: {
     height: '100%',
