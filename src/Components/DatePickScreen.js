@@ -10,40 +10,40 @@ import {
   Switch,
   DatePickerIOS
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 
 export default class DatePickScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: props.location,
-      report: {
-        experienced: true,
-        map_location: this.props.location,
-        date: new Date
-      }
+      latitude: this.props.latitude,
+      longitude: this.props.longitude,
+      role: this.props.role,
+      date: new Date
     }
-  }
+  };
 
-  handleButtonSubmit(){
-    console.log(this.state.report)
-    navigator.geolocation.getCurrentPosition((position) => {console.log(position)})
-  }
+componentWillMount() {
+  console.log(this.state)
+};
 
-  handleValueChange(value) {
-    console.log(value)
-    let newReport = Object.assign({}, this.state.report, {experienced: value})
-    this.setState({
-      report: newReport
-    })
-  }
+goToThanks() {
+    console.log('going to thanks!');
+    Actions.thanks({
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      role: this.state.role,
+      date: this.state.date
+      })
+  };
 
   handleDateChange(date) {
-    let newReport = Object.assign({}, this.state.report, {date: date})
+    console.log(date);
     this.setState({
-      report: newReport
+      date: date
     })
-  }
+  };
   
   render() {
     return (
@@ -53,15 +53,16 @@ export default class DatePickScreen extends Component {
           </Text>
         <View style={styles.pickerWrapper}>
           <DatePickerIOS 
-          date={this.state.report.date}
+          date={this.state.date}
           onDateChange={this.handleDateChange.bind(this)}
           />
         </View>
           <View style={styles.button}>
             <TouchableOpacity
-              onPress={this.handleButtonSubmit.bind(this)}>
+            onPress={this.goToThanks.bind(this)}
+              >
                 <Text style = {styles.buttonText} >
-                  Submit 
+                  Next 
                 </Text>
             </TouchableOpacity>
           </View>

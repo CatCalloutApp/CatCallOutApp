@@ -4,21 +4,22 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import MapScreen from './src/Components/MapScreen';
-import DatePickScreen from './src/Components/DatePickScreen';
-import WitnessedScreen from './src/Components/WitnessedScreen';
-import ThanksScreen from './src/Components/ThanksScreen';
+import App from './src/App'
+// import MapScreen from './src/Components/MapScreen';
+// import DatePickScreen from './src/Components/DatePickScreen';
+// import WitnessedScreen from './src/Components/WitnessedScreen';
+// import ThanksScreen from './src/Components/ThanksScreen';
 
-export default class CatCallOutApp extends Component {
+// export default class CatCallOutApp extends Component {
   
-  render() {
-    return (
-      <ThanksScreen/>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <MapScreen/>
+//     );
+//   }
+// }
 
-
-AppRegistry.registerComponent('CatCallOutApp', () => CatCallOutApp);
+// console.disableYellowBox = true 
+AppRegistry.registerComponent('CatCallOutApp', () => App);

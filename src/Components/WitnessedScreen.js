@@ -10,19 +10,24 @@ import {
   Switch,
   DatePickerIOS
 } from 'react-native';
-import axios from 'axios';
+import { Actions} from 'react-native-router-flux';
 
 export default class WitnessedScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: props.location,
-      report: {
-        experienced: true,
-        map_location: this.props.location,
-        date: new Date
-      }
+      latitude: this.props.latitude,
+      longitude: this.props.longitude,
     }
+  }
+
+  goToDatePick(role) {
+    console.log('going to datepick!');
+    Actions.datepick({
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      role: role
+      })
   }
 
   render() {
@@ -32,14 +37,18 @@ export default class WitnessedScreen extends Component {
             I'm calling out
           </Text>
           <View style={styles.button}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.goToDatePick.bind(this)('witnessed')}
+            >
                 <Text style = {styles.buttonText} >
                   something I witnessed 
                 </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.button}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.goToDatePick.bind(this)('experienced')}
+            >
                 <Text style = {styles.buttonText} >
                   something I experienced 
                 </Text>

@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import axios from 'axios';
+import { Actions} from 'react-native-router-flux';
 import {REACT_APP_GOOGLE_MAPS_API, REACT_APP_GOOGLE_PLACES_API} from 'react-native-dotenv';
 
 export default class MapScreen extends Component {
@@ -33,6 +34,14 @@ export default class MapScreen extends Component {
 
     this.handleLocationInput = this.handleLocationInput.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+  }
+
+  callout() {
+    console.log('called out!');
+    Actions.witnessed({
+      latitude: this.state.locationCoordinates.latitude,
+      longitude: this.state.locationCoordinates.longitude
+      })
   }
 
   handleLocationInput(textInput) {
@@ -104,7 +113,7 @@ export default class MapScreen extends Component {
 
           <View style={styles.button} >
             <TouchableOpacity 
-              onPress={this.handleReport.bind(this)}
+              onPress={this.callout.bind(this)}
             > 
               <Text style = {styles.buttonText} >
                 Call it out 
