@@ -64,7 +64,7 @@ export default class DatePickScreen extends Component {
                   Next 
                 </Text>
             </TouchableOpacity>
-        </View>
+          </View>
       </View>
     );
   }
