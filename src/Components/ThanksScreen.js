@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 
-export default class DatePickScreen extends Component {
+export default class ThanksScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,43 +25,19 @@ export default class DatePickScreen extends Component {
     }
   }
 
-  handleButtonSubmit(){
-    console.log(this.state.report)
-    navigator.geolocation.getCurrentPosition((position) => {console.log(position)})
-  }
-
-  handleValueChange(value) {
-    console.log(value)
-    let newReport = Object.assign({}, this.state.report, {experienced: value})
-    this.setState({
-      report: newReport
-    })
-  }
-
-  handleDateChange(date) {
-    let newReport = Object.assign({}, this.state.report, {date: date})
-    this.setState({
-      report: newReport
-    })
-  }
-  
   render() {
     return (
       <View style={styles.fullScreenWrapper}>
           <Text style={styles.textHeading}>
-          It happened on
+            Way to call it out!
           </Text>
-        <View style={styles.pickerWrapper}>
-          <DatePickerIOS 
-          date={this.state.report.date}
-          onDateChange={this.handleDateChange.bind(this)}
-          />
-        </View>
+          <Text style={styles.textHeading2}>
+            Thanks for doing your part to keep our streets safe.
+          </Text>
           <View style={styles.button}>
-            <TouchableOpacity
-              onPress={this.handleButtonSubmit.bind(this)}>
+            <TouchableOpacity>
                 <Text style = {styles.buttonText} >
-                  Submit 
+                  Return to map  
                 </Text>
             </TouchableOpacity>
           </View>
@@ -71,10 +47,6 @@ export default class DatePickScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  entryField: {
-    height: 20, 
-    width: 200
-  },
   fullScreenWrapper: {
     alignItems: 'center',
     justifyContent: 'center',    
@@ -82,42 +54,48 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#edeaea'
   },
-  pickerWrapper: {
-    margin: 20,
-    height: '46%',
-    width: '85%'
-  },
-    textHeading: {
+  textHeading: {
     color: '#ff6600',
     fontSize: 28,
     justifyContent: 'center',
     fontWeight: 'bold',
-    height: '7%',
+    height: '10%',
     width: '85%',
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  textHeading2: {
+    color: '#ff6600',
+    fontSize: 28,
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    height: '15%',
+    width: '85%',
+    textAlign: 'center',
+    marginBottom: 20
   },
   button: {
-    elevation: 1,
-    position: 'absolute',
-    bottom: 25,
     backgroundColor: '#edeaea',
     borderColor: '#ff6600',
     borderWidth: 1,
     borderRadius: 10,
-    width: '60%',
-    height: 40,
-    marginBottom: 160,
+    width: '75%',
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     shadowOpacity: 0.75,
     shadowRadius: 1,
     shadowColor: 'gray',
     shadowOffset: { height: 0, width: 0},
+    marginTop: 20,
+    marginBottom: 20
   },
   buttonText: {
     color: '#ff6600',
-    fontSize: 20,
+    fontSize: 24,
   },
 })
 
-AppRegistry.registerComponent('DatePickScreen', () => DatePickScreen);
+AppRegistry.registerComponent('ThanksScreen', () => ThanksScreen);
+
+
+      
