@@ -3,6 +3,11 @@ A mobile app for reporting street harassment by geolocation.
 
 ![](https://github.com/CatCalloutApp/CatCallOutApp/blob/development/ccoblackbg.jpg)
 
+## Background
+For the vast majority of women, public spaces aren’t necessarily safe. Over 99% of American have been a victim of street harassment. Beyond being unpleasant, street harassment runs the risk of escalating into something more aggressive and dangerous. What if there was a way to avoid it?
+
+CatCallOut is a civic tech initiative to make our streets safer. We are a team of three developers, committed to building a mobile app that aggregates data about incidents of street harassment, and displays this data on a map. This way, everyone can see street harassment danger zones - and plan routes to avoid these areas.
+
 ## MVP Functionality
 
 CatCallOut is built on a decoupled architecture featuring:
