@@ -7,13 +7,13 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import MapScreen from './src/Components/MapScreen';
-import FormScreen from './src/Components/FormScreen'
+import DatePickScreen from './src/Components/DatePickScreen'
 
 export default class CatCallOutApp extends Component {
   
   render() {
     return (
-      <MapScreen/>
+      <DatePickScreen/>
     );
   }
 }
