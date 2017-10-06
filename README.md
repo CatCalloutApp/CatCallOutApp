@@ -1,6 +1,8 @@
 # CatCallOut
 A mobile app for reporting street harassment by geolocation.
 
+![](https://github.com/CatCalloutApp/CatCallOutApp/blob/development/ccoblackbg.jpg)
+
 ## MVP Functionality
 
 CatCallOut is built on a decoupled architecture featuring:
