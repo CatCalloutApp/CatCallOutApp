@@ -17,8 +17,9 @@ render() {
     <Router>
       <Scene key="root">
         <Scene 
-          key="callout-map"
+          key="map"
           component={MapScreen}
+          callout={this.callout}
           hideNavBar={true}
           initial 
         />

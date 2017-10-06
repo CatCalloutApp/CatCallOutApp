@@ -10,6 +10,7 @@ import {
   Switch,
   DatePickerIOS
 } from 'react-native';
+import { Actions} from 'react-native-router-flux';
 import axios from 'axios';
 
 export default class ThanksScreen extends Component {
