@@ -21,5 +21,5 @@ import App from './src/App'
 //   }
 // }
 
-console.disableYellowBox = true 
+// console.disableYellowBox = true 
 AppRegistry.registerComponent('CatCallOutApp', () => App);

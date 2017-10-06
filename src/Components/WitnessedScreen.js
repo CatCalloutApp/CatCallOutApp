@@ -18,7 +18,6 @@ export default class WitnessedScreen extends Component {
     this.state = {
       latitude: this.props.latitude,
       longitude: this.props.longitude,
-      role: ''
     }
   }
 
@@ -48,7 +47,7 @@ export default class WitnessedScreen extends Component {
           </View>
           <View style={styles.button}>
             <TouchableOpacity
-              onPress={() => this.goToDatePick.bind(this)('witnessed')}
+              onPress={() => this.goToDatePick.bind(this)('experienced')}
             >
                 <Text style = {styles.buttonText} >
                   something I experienced 

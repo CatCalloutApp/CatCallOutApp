@@ -39,8 +39,8 @@ export default class MapScreen extends Component {
   callout() {
     console.log('called out!');
     Actions.witnessed({
-      latitude: this.state.latitude,
-      longitude: this.state.longitude
+      latitude: this.state.locationCoordinates.latitude,
+      longitude: this.state.locationCoordinates.longitude
       })
   }
 

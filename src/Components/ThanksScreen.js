@@ -10,21 +10,41 @@ import {
   Switch,
   DatePickerIOS
 } from 'react-native';
-import { Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 
 export default class ThanksScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: props.location,
-      report: {
-        experienced: true,
-        map_location: this.props.location,
-        date: new Date
-      }
+      latitude: this.props.latitude,
+      longitude: this.props.longitude,
+      role: this.props.role,
+      date: this.props.date
     }
   }
+
+componentWillMount() {
+  console.log(this.state)
+}
+
+goBackToMap(role) {
+    console.log('going to datepick!');
+    Actions.datepick({
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      role: role
+      })
+  }
+
+// dateParser() {
+//   let monthNames = [“January”, “February”, “March”, “April”, “May”, “June”,
+//   “July”, “August”, “September”, “October”, “November”, “December”];
+
+//   let dateToConvert = this.state.date
+  
+
+// }
 
   render() {
     return (
@@ -33,12 +53,19 @@ export default class ThanksScreen extends Component {
             Way to call it out!
           </Text>
           <Text style={styles.textHeading2}>
-            Thanks for doing your part to keep our streets safe.
+            You {this.state.role} street harassment on {this.state.date.toString()}.
           </Text>
           <View style={styles.button}>
             <TouchableOpacity>
                 <Text style = {styles.buttonText} >
-                  Return to map  
+                  Submit 
+                </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.cancelButton}>
+            <TouchableOpacity>
+                <Text style = {styles.cancelButtonText} >
+                  Cancel  
                 </Text>
             </TouchableOpacity>
           </View>
@@ -94,6 +121,17 @@ const styles = StyleSheet.create({
     color: '#ff6600',
     fontSize: 24,
   },
+  cancelButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  cancelButtonText: {
+    color: '#ff6600',
+    fontSize: 16,
+    textDecorationLine: 'underline'
+  }
 })
 
 AppRegistry.registerComponent('ThanksScreen', () => ThanksScreen);
