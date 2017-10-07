@@ -24,16 +24,10 @@ export default class ThanksScreen extends Component {
     }
   }
 
-componentWillMount() {
-  console.log(this.state)
-}
-
 goBackToMap(role) {
-    console.log('going to datepick!');
-    Actions.datepick({
+    Actions.map({
       latitude: this.state.latitude,
-      longitude: this.state.longitude,
-      role: role
+      longitude: this.state.longitude
       })
   }
 
@@ -62,14 +56,17 @@ dateParser() {
             {this.dateParser()}.
           </Text>
           <View style={styles.button}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.goBackToMap.bind(this)}
+            >
                 <Text style = {styles.buttonText} >
                   Submit 
                 </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.cancelButton}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.goBackToMap.bind(this)}>
                 <Text style = {styles.cancelButtonText} >
                   Cancel  
                 </Text>

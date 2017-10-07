@@ -24,12 +24,7 @@ export default class DatePickScreen extends Component {
     }
   };
 
-componentWillMount() {
-  console.log(this.state)
-};
-
 goToThanks() {
-    console.log('going to thanks!');
     Actions.thanks({
       latitude: this.state.latitude,
       longitude: this.state.longitude,
@@ -39,7 +34,6 @@ goToThanks() {
   };
 
   handleDateChange(date) {
-    console.log(date);
     this.setState({
       date: date
     })
