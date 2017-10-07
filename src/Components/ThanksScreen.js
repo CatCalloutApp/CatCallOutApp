@@ -24,27 +24,24 @@ export default class ThanksScreen extends Component {
     }
   }
 
-componentWillMount() {
-  console.log(this.state)
-}
-
 goBackToMap(role) {
-    console.log('going to datepick!');
-    Actions.datepick({
+    Actions.map({
       latitude: this.state.latitude,
-      longitude: this.state.longitude,
-      role: role
+      longitude: this.state.longitude
       })
   }
 
-// dateParser() {
-//   let monthNames = [“January”, “February”, “March”, “April”, “May”, “June”,
-//   “July”, “August”, “September”, “October”, “November”, “December”];
+dateParser() {
+  let monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'];
 
-//   let dateToConvert = this.state.date
-  
+  let dateToConvert = this.state.date
+  let month = monthNames[dateToConvert.getMonth()]
+  let day = dateToConvert.getDate()
+  let time = dateToConvert.toTimeString().slice(0, 5)
 
-// }
+  return month + ' ' + day + ' at ' + time 
+}
 
   render() {
     return (
@@ -53,17 +50,23 @@ goBackToMap(role) {
             Way to call it out!
           </Text>
           <Text style={styles.textHeading2}>
-            You {this.state.role} street harassment on {this.state.date.toString()}.
+            You {this.state.role} street harassment on
+          </Text>
+          <Text style={styles.textHeadingDate}>
+            {this.dateParser()}.
           </Text>
           <View style={styles.button}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.goBackToMap.bind(this)}
+            >
                 <Text style = {styles.buttonText} >
                   Submit 
                 </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.cancelButton}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.goBackToMap.bind(this)}>
                 <Text style = {styles.cancelButtonText} >
                   Cancel  
                 </Text>
@@ -96,10 +99,18 @@ const styles = StyleSheet.create({
     fontSize: 28,
     justifyContent: 'center',
     fontWeight: 'bold',
-    height: '15%',
+    height: '10%',
     width: '85%',
-    textAlign: 'center',
-    marginBottom: 20
+    textAlign: 'center'
+  },
+    textHeadingDate: {
+    color: '#ff6600',
+    fontSize: 28,
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    height: '10%',
+    width: '85%',
+    textAlign: 'center'
   },
   button: {
     backgroundColor: '#edeaea',

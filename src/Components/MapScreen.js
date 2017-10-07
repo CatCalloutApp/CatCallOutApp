@@ -37,7 +37,6 @@ export default class MapScreen extends Component {
   }
 
   callout() {
-    console.log('called out!');
     Actions.witnessed({
       latitude: this.state.locationCoordinates.latitude,
       longitude: this.state.locationCoordinates.longitude
@@ -51,7 +50,6 @@ export default class MapScreen extends Component {
   }
 
   updateLocationCoordinates(response){
-    console.log(response)
     var info = response.data.results[0].geometry.location 
     this.setState({
       locationCoordinates: {
@@ -63,7 +61,6 @@ export default class MapScreen extends Component {
     })
   }
 
-
   handleSubmit(textInput) {
     axios.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.locationInput.split(' ').join('') + "&key=" + REACT_APP_GOOGLE_PLACES_API)
     .then(response => this.updateLocationCoordinates(response))
@@ -71,15 +68,9 @@ export default class MapScreen extends Component {
   }
 
   handleLocationChange(response){
-    console.log('handleLocationChange: ', response)
     this.setState({
       locationCoordiante: response
     })
-  }
-
-  handleReport() {
-    console.log('reported!')
-
   }
 
   render() {

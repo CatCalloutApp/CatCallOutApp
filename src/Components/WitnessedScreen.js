@@ -10,7 +10,7 @@ import {
   Switch,
   DatePickerIOS
 } from 'react-native';
-import { Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 
 export default class WitnessedScreen extends Component {
   constructor(props) {
@@ -22,7 +22,6 @@ export default class WitnessedScreen extends Component {
   }
 
   goToDatePick(role) {
-    console.log('going to datepick!');
     Actions.datepick({
       latitude: this.state.latitude,
       longitude: this.state.longitude,
