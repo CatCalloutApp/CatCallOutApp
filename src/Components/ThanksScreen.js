@@ -22,6 +22,7 @@ export default class ThanksScreen extends Component {
       role: this.props.role,
       date: this.props.date
     }
+    this.goBackToMap = this.goBackToMap.bind(this)
   }
 
 goBackToMap(role) {
@@ -29,6 +30,17 @@ goBackToMap(role) {
       latitude: this.state.latitude,
       longitude: this.state.longitude
       })
+  }
+
+  submitToDB() {
+    axios.post('http://localhost:3000', {
+      params: {
+        report: this.state
+      });
+    // no error handling here. should we even put some? seems reasonable. Just a something went wrong, please try again page?
+    .then(() =>
+      this.goBackToMap()
+    );
   }
 
 dateParser() {
@@ -40,7 +52,7 @@ dateParser() {
   let day = dateToConvert.getDate()
   let time = dateToConvert.toTimeString().slice(0, 5)
 
-  return month + ' ' + day + ' at ' + time 
+  return month + ' ' + day + ' at ' + time
 }
 
   render() {
@@ -57,18 +69,18 @@ dateParser() {
           </Text>
           <View style={styles.button}>
             <TouchableOpacity
-              onPress={this.goBackToMap.bind(this)}
+              onPress={this.submitToDB.bind(this)}
             >
                 <Text style = {styles.buttonText} >
-                  Submit 
+                  Submit
                 </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.cancelButton}>
             <TouchableOpacity
-              onPress={this.goBackToMap.bind(this)}>
+              onPress={this.goBackToMap}>
                 <Text style = {styles.cancelButtonText} >
-                  Cancel  
+                  Cancel
                 </Text>
             </TouchableOpacity>
           </View>
@@ -80,7 +92,7 @@ dateParser() {
 const styles = StyleSheet.create({
   fullScreenWrapper: {
     alignItems: 'center',
-    justifyContent: 'center',    
+    justifyContent: 'center',
     width: '100%',
     height: '100%',
     backgroundColor: '#edeaea'
@@ -148,4 +160,4 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent('ThanksScreen', () => ThanksScreen);
 
 
-      
+

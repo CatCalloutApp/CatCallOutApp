@@ -45,8 +45,8 @@ export default class MapScreen extends Component {
       this.setState({
         witnessed: response.witnessed,
         experienced: response.experienced
-      })
-    })
+      });
+    });
   }
 
   callout() {
@@ -145,7 +145,6 @@ export default class MapScreen extends Component {
           </View>
         </View>
       </View>
-
     );
   }
 }
