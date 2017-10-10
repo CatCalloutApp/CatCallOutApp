@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   View,
   Switch,
-  DatePickerIOS
+  DatePickerIOS,
+  Modal,
+  TouchableHighlight
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
@@ -20,9 +22,14 @@ export default class ThanksScreen extends Component {
       latitude: this.props.latitude,
       longitude: this.props.longitude,
       role: this.props.role,
-      date: this.props.date
+      date: this.props.date,
+      modalVisible: false
     }
     this.goBackToMap = this.goBackToMap.bind(this)
+  }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
 
 goBackToMap(role) {
@@ -35,12 +42,19 @@ goBackToMap(role) {
   submitToDB() {
     axios.post('http://localhost:3000', {
       params: {
-        report: this.state
+        report: {
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+          role: this.state.role,
+          date: this.state.date
+        }
       });
-    // no error handling here. should we even put some? seems reasonable. Just a something went wrong, please try again page?
     .then(() =>
       this.goBackToMap()
-    );
+    )
+    .catch(() =>
+        this.setModalVisible(!this.state.modalVisible)
+      )
   }
 
 dateParser() {
@@ -58,6 +72,26 @@ dateParser() {
   render() {
     return (
       <View style={styles.fullScreenWrapper}>
+      // I have no idea how this will look. Might be awful, might just need some styling.
+      // in some brief research i saw several options for modules with nice modals? if we don't like this maybe use one of them.
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          >
+          <View style={{marginTop: 22}}>
+            <View>
+              <Text>Something went wrong. Please try again!</Text>
+              <TouchableHighlight onPress={() => {
+                this.setModalVisible(!this.state.modalVisible)
+              }}>
+                <Text>Okay</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+
+
           <Text style={styles.textHeading}>
             Way to call it out!
           </Text>
