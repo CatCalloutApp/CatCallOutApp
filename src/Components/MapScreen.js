@@ -29,11 +29,24 @@ export default class MapScreen extends Component {
           longitude: -122.4194,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
-        }
+        },
+        witnessed: {},
+        experienced: {}
     };
 
     this.handleLocationInput = this.handleLocationInput.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+  }
+
+// Josh, is this a did or will. I remember you saying something about using did instead of will. was it in this situation?
+  componentWillMount() {
+    axios.get('http://localhost:3000/reports')
+    .then((response) =>
+      this.setState({
+        witnessed: response.witnessed,
+        experienced: response.experienced
+      })
+    })
   }
 
   callout() {
@@ -50,7 +63,7 @@ export default class MapScreen extends Component {
   }
 
   updateLocationCoordinates(response){
-    var info = response.data.results[0].geometry.location 
+    var info = response.data.results[0].geometry.location
     this.setState({
       locationCoordinates: {
         latitude: info.lat,
@@ -73,6 +86,28 @@ export default class MapScreen extends Component {
     })
   }
 
+  createWitnessedMarkers(){
+    return this.state.witnessed.map((harassment) =>
+      <MapView.Marker
+        coordinate={{
+          latitude: harassment.latitude,
+          longitude: harassment.longitude,
+        }}
+      />
+    );
+  }
+
+  createExperiencedMarkers(){
+    return this.state.experienced.map((harassment) =>
+      <MapView.Marker
+        coordinate={{
+          latitude: harassment.latitude,
+          longitude: harassment.longitude,
+        }}
+      />
+    );
+  }
+
   render() {
     return (
       <View style={styles.overallViewContainer}>
@@ -81,15 +116,12 @@ export default class MapScreen extends Component {
         style={ styles.container }
         region={this.state.locationCoordinates}
         onRegionChange={this.handleLocationChange}
-        zoomEnabled={true} 
-        scrollEnabled={true} 
+        zoomEnabled={true}
+        scrollEnabled={true}
       >
-        <MapView.Marker 
-          coordinate={{
-            latitude: 37.7749,
-            longitude: -122.4194,
-          }}
-        />
+      // I separated the following so that we could color them differently.
+        {this.createWitnessedMarkers()}
+        {this.createExperiencedMarkers()}
         </MapView>
         <View style={styles.allNonMapThings}>
           <View style={styles.inputContainer}>
@@ -103,11 +135,11 @@ export default class MapScreen extends Component {
           </View>
 
           <View style={styles.button} >
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={this.callout.bind(this)}
-            > 
+            >
               <Text style = {styles.buttonText} >
-                Call it out 
+                Call it out
               </Text>
             </TouchableOpacity>
           </View>
