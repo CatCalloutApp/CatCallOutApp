@@ -33,7 +33,7 @@ goBackToMap(role) {
   }
 
   submitToDB() {
-    axios.post('http://localhost:3000', {
+    axios.post('http://localhost:3000/reports', {
       params: {
         report: this.state
       });
