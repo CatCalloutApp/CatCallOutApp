@@ -38,8 +38,7 @@ export default class MapScreen extends Component {
     this.handleLocationChange = this.handleLocationChange.bind(this);
   }
 
-// Josh, is this a did or will. I remember you saying something about using did instead of will. was it in this situation?
-  componentWillMount() {
+  componentDidMount() {
     axios.get('http://localhost:3000/reports')
     .then((response) =>
       this.setState({
