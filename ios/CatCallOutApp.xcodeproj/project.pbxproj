@@ -486,6 +486,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		030211621F8ECEF1003C8B7C /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				FF66687B18564C3B97D07F71 /* libAirMaps.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		03D11C731F7582D300125077 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,6 +656,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				B6AC710A92B81AFDC1C5890B /* Pods */,
 				9CBEC2C311A5DFC744C42EFE /* Frameworks */,
+				030211621F8ECEF1003C8B7C /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
