@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -29,11 +23,23 @@ export default class MapScreen extends Component {
           longitude: -122.4194,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
-        }
+        },
+        witnessed: [],
+        experienced: []
     };
 
     this.handleLocationInput = this.handleLocationInput.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3000/reports')
+    .then((response) => {
+      this.setState({
+        witnessed: response.data.witnessed.map(parseCoordinatesToNumber),
+        experienced: response.data.experienced.map(parseCoordinatesToNumber) })
+    }
+    )
   }
 
   callout() {
@@ -50,15 +56,19 @@ export default class MapScreen extends Component {
   }
 
   updateLocationCoordinates(response){
-    var info = response.data.results[0].geometry.location 
-    this.setState({
-      locationCoordinates: {
-        latitude: info.lat,
-        longitude: info.lng,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }
-    })
+    if(response.data.results[0].geometry) {
+      const info = response.data.results[0].geometry.location
+      this.setState({
+        locationCoordinates: {
+          latitude: Number(info.lat),
+          longitude: Number(info.lng),
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }
+      })
+    } else {
+      console.log('Address not found! :(')
+    }
   }
 
   handleSubmit(textInput) {
@@ -73,6 +83,36 @@ export default class MapScreen extends Component {
     })
   }
 
+  createWitnessedMarkers(){
+    return this.state.witnessed.map((harassment) =>
+      <MapView.Marker
+        coordinate={{
+          latitude: Number(harassment.latitude),
+          longitude: Number(harassment.longitude),
+          role: role,
+          date: date
+        }}
+      />
+    );
+  }
+
+  parseCoordinatesToNumber(coordObject){
+    return Object.assign(coordObject, {latitude: Number(coordObject.latitude),
+            longitude: Number(coordObject.longitude)})
+  }
+
+
+  createExperiencedMarkers(){
+    return this.state.experienced.map((harassment) =>
+      <MapView.Marker
+        coordinate={{
+          latitude: harassment.latitude,
+          longitude: harassment.longitude,
+        }}
+      />
+    );
+  }
+
   render() {
     return (
       <View style={styles.overallViewContainer}>
@@ -81,15 +121,11 @@ export default class MapScreen extends Component {
         style={ styles.container }
         region={this.state.locationCoordinates}
         onRegionChange={this.handleLocationChange}
-        zoomEnabled={true} 
-        scrollEnabled={true} 
+        zoomEnabled={true}
+        scrollEnabled={true}
       >
-        <MapView.Marker 
-          coordinate={{
-            latitude: 37.7749,
-            longitude: -122.4194,
-          }}
-        />
+        {this.createWitnessedMarkers()}
+        {this.createExperiencedMarkers()}
         </MapView>
         <View style={styles.allNonMapThings}>
           <View style={styles.inputContainer}>
@@ -103,17 +139,16 @@ export default class MapScreen extends Component {
           </View>
 
           <View style={styles.button} >
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={this.callout.bind(this)}
-            > 
+            >
               <Text style = {styles.buttonText} >
-                Call it out 
+                Call it out
               </Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-
     );
   }
 }
