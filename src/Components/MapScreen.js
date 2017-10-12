@@ -30,8 +30,8 @@ export default class MapScreen extends Component {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         },
-        witnessed: {},
-        experienced: {}
+        witnessed: [],
+        experienced: []
     };
 
     this.handleLocationInput = this.handleLocationInput.bind(this);
@@ -40,12 +40,11 @@ export default class MapScreen extends Component {
 
   componentDidMount() {
     axios.get('http://localhost:3000/reports')
-    .then((response) =>
-      this.setState({
-        witnessed: response.witnessed,
-        experienced: response.experienced
-      });
-    });
+    .then((response) => this.setState({
+        witnessed: response.data.witnessed,
+        experienced: response.data.experienced
+      })
+    )
   }
 
   callout() {
@@ -118,7 +117,6 @@ export default class MapScreen extends Component {
         zoomEnabled={true}
         scrollEnabled={true}
       >
-      // I separated the following so that we could color them differently.
         {this.createWitnessedMarkers()}
         {this.createExperiencedMarkers()}
         </MapView>

@@ -34,13 +34,12 @@ goBackToMap(role) {
 
   submitToDB() {
     axios.post('http://localhost:3000/reports', {
-      params: {
         report: this.state
-      });
-    // no error handling here. should we even put some? seems reasonable. Just a something went wrong, please try again page?
+    })
     .then(() =>
       this.goBackToMap()
-    );
+    )
+    .catch(error => console.log('There is an error :( ', error))
   }
 
 dateParser() {
