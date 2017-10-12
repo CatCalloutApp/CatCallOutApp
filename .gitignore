@@ -24,6 +24,8 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+ios/CatCallOutApp/AppDelegate.m
+
 
 # Android/IntelliJ
 #
