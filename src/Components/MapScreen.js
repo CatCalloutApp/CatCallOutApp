@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -40,10 +34,11 @@ export default class MapScreen extends Component {
 
   componentDidMount() {
     axios.get('http://localhost:3000/reports')
-    .then((response) => this.setState({
-        witnessed: response.data.witnessed,
-        experienced: response.data.experienced
-      })
+    .then((response) => {
+      this.setState({
+        witnessed: response.data.witnessed.map(parseCoordinatesToNumber),
+        experienced: response.data.experienced.map(parseCoordinatesToNumber) })
+    }
     )
   }
 
@@ -61,15 +56,19 @@ export default class MapScreen extends Component {
   }
 
   updateLocationCoordinates(response){
-    var info = response.data.results[0].geometry.location
-    this.setState({
-      locationCoordinates: {
-        latitude: info.lat,
-        longitude: info.lng,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }
-    })
+    if(response.data.results[0].geometry) {
+      const info = response.data.results[0].geometry.location
+      this.setState({
+        locationCoordinates: {
+          latitude: Number(info.lat),
+          longitude: Number(info.lng),
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }
+      })
+    } else {
+      console.log('Address not found! :(')
+    }
   }
 
   handleSubmit(textInput) {
@@ -88,12 +87,20 @@ export default class MapScreen extends Component {
     return this.state.witnessed.map((harassment) =>
       <MapView.Marker
         coordinate={{
-          latitude: harassment.latitude,
-          longitude: harassment.longitude,
+          latitude: Number(harassment.latitude),
+          longitude: Number(harassment.longitude),
+          role: role,
+          date: date
         }}
       />
     );
   }
+
+  parseCoordinatesToNumber(coordObject){
+    return Object.assign(coordObject, {latitude: Number(coordObject.latitude),
+            longitude: Number(coordObject.longitude)})
+  }
+
 
   createExperiencedMarkers(){
     return this.state.experienced.map((harassment) =>
