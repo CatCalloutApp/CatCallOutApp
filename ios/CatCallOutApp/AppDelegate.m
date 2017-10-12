@@ -21,9 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
-<<<<<<< HEAD
-  [GMSServices provideAPIKey:@"FILL-IN-KEY"];
-  [GMSServices provideAPIKey:@CcoGoogleMapsAPIKey];
+  [GMSServices provideAPIKey:@"GOOGLE_MAPS_API_KEY"];
+  [GMSPlacesClient provideAPIKey:@"GOOGLE_PLACES_API_KEY"];
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
