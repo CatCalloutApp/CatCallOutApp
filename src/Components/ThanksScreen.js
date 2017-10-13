@@ -41,7 +41,12 @@ goBackToMap(role) {
 
   submitToDB() {
     axios.post('http://localhost:3000/reports', {
-        report: this.state
+        report: {
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+          role: this.state.role,
+          date: this.state.date,
+        }
     })
     .then(() =>
       this.goBackToMap()
