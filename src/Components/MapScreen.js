@@ -79,7 +79,7 @@ export default class MapScreen extends Component {
 
   handleLocationChange(response){
     this.setState({
-      locationCoordiante: response
+      locationCoordinates: response
     })
   }
 
@@ -120,14 +120,13 @@ export default class MapScreen extends Component {
         provider={ PROVIDER_GOOGLE }
         style={ styles.container }
         region={this.state.locationCoordinates}
-        onRegionChange={this.handleLocationChange}
+        onRegionChangeComplete={this.handleLocationChange}
         zoomEnabled={true}
         scrollEnabled={true}
       >
         {this.createWitnessedMarkers()}
         {this.createExperiencedMarkers()}
         </MapView>
-        <View style={styles.allNonMapThings}>
           <View style={styles.inputContainer}>
             <TextInput
               placeholder=" Where to?"
@@ -137,7 +136,6 @@ export default class MapScreen extends Component {
               onSubmitEditing={this.handleSubmit.bind(this)}
             />
           </View>
-
           <View style={styles.button} >
             <TouchableOpacity
               onPress={this.callout.bind(this)}
@@ -147,7 +145,10 @@ export default class MapScreen extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
+        { /* 
+        <View style={styles.allNonMapThings}>
+
+        </View>*/}
       </View>
     );
   }
