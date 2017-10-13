@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   View,
   Switch,
-  DatePickerIOS
+  DatePickerIOS,
+  Modal,
+  TouchableHighlight
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
@@ -20,10 +22,15 @@ export default class ThanksScreen extends Component {
       latitude: this.props.latitude,
       longitude: this.props.longitude,
       role: this.props.role,
-      date: this.props.date
+      date: this.props.date,
+      modalVisible: false
     }
     this.goBackToMap = this.goBackToMap.bind(this)
   }
+
+setModalVisible(visible){
+  this.setState({modalVisible: visible});
+}
 
 goBackToMap(role) {
     Actions.map({
@@ -34,12 +41,17 @@ goBackToMap(role) {
 
   submitToDB() {
     axios.post('http://localhost:3000/reports', {
-        report: this.state
+        report: {
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+          role: this.state.role,
+          date: this.state.date,
+        }
     })
     .then(() =>
       this.goBackToMap()
     )
-    .catch(error => console.log('There is an error :( ', error))
+    .catch(() => this.setModalVisible(!this.state.modalVisible))
   }
 
 dateParser() {
@@ -57,6 +69,25 @@ dateParser() {
   render() {
     return (
       <View style={styles.fullScreenWrapper}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={this.state.modalVisible}
+      >
+        <View style={styles.modal}>
+            <View>
+            <Text style={styles.modalText}>Something went wrong :(</Text>
+              <Text style={styles.modalText2}>Maybe cancel and try again?</Text>
+            <TouchableHighlight onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+              <View style={styles.modalExitButton}>
+                <Text style={styles.modalExitText}>Exit</Text>
+              </View>
+            </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
           <Text style={styles.textHeading}>
             Way to call it out!
           </Text>
@@ -153,6 +184,45 @@ const styles = StyleSheet.create({
     color: '#ff6600',
     fontSize: 16,
     textDecorationLine: 'underline'
+  },
+  modal: {
+    marginTop: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
+  },
+  modalText: {
+    color: '#800000',
+    fontSize: 20,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginBottom: 5,
+    width: 250
+  },
+  modalText2: {
+    color: '#800000',
+    fontSize: 20,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginBottom: 5,
+    width: 350
+  },
+  modalExitButton: {
+    borderColor: '#800000',
+    borderWidth: 1,
+    width: 70,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 5,
+    marginTop: 5
+  },
+  modalExitText: {
+    color: '#800000',
+    fontSize: 20,
+    fontWeight: 'bold',
   }
 })
 
