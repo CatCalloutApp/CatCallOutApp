@@ -33,13 +33,18 @@ export default class MapScreen extends Component {
   }
 
   componentDidMount() {
+    this.getMapMarkers()
+  }
+
+  getMapMarkers() {
     axios.get('http://localhost:3000/reports')
     .then((response) => {
       this.setState({
-        witnessed: response.data.witnessed.map(parseCoordinatesToNumber),
-        experienced: response.data.experienced.map(parseCoordinatesToNumber) })
+        witnessed: response.data.witnessed.map(this.parseCoordinatesToNumber),
+        experienced: response.data.experienced.map(this.parseCoordinatesToNumber) })
     }
     )
+    .catch(error => console.log("Map Marker axios error: ", error))
   }
 
   callout() {
@@ -50,6 +55,7 @@ export default class MapScreen extends Component {
   }
 
   handleLocationInput(textInput) {
+    this.getMapMarkers();
     this.setState({
       locationInput: textInput
     });
@@ -89,10 +95,8 @@ export default class MapScreen extends Component {
     return this.state.witnessed.map((harassment) =>
       <MapView.Marker
         coordinate={{
-          latitude: Number(harassment.latitude),
-          longitude: Number(harassment.longitude),
-          role: role,
-          date: date
+          latitude: harassment.latitude,
+          longitude: harassment.longitude,
         }}
       />
     );
