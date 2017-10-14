@@ -58,12 +58,14 @@ export default class MapScreen extends Component {
   updateLocationCoordinates(response){
     if(response.data.results[0].geometry) {
       const info = response.data.results[0].geometry.location
-      this.setState({
+      const latDelta = Number(response.data.results[0].geometry.viewport.northeast.lat) - Number(response.data.results[0].geometry.viewport.southwest.lat)
+      const lngDelta = Number(response.data.results[0].geometry.viewport.northeast.lng) - Number(response.data.results[0].geometry.viewport.southwest.lng)
+       this.setState({
         locationCoordinates: {
           latitude: Number(info.lat),
           longitude: Number(info.lng),
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: latDelta,
+          longitudeDelta: lngDelta,
         }
       })
     } else {
@@ -145,10 +147,6 @@ export default class MapScreen extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-        { /* 
-        <View style={styles.allNonMapThings}>
-
-        </View>*/}
       </View>
     );
   }
