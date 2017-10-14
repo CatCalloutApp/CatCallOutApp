@@ -34,6 +34,14 @@ export default class MapScreen extends Component {
 
   componentDidMount() {
     this.getMapMarkers()
+    this.setState({
+      locationCoordinates: {
+        latitude: 37.7749,
+        longitude: -122.4194,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      }
+    })
   }
 
   getMapMarkers() {
@@ -94,6 +102,7 @@ export default class MapScreen extends Component {
   createWitnessedMarkers(){
     return this.state.witnessed.map((harassment) =>
       <MapView.Marker
+        key={harassment.id}
         coordinate={{
           latitude: harassment.latitude,
           longitude: harassment.longitude,
@@ -111,6 +120,7 @@ export default class MapScreen extends Component {
   createExperiencedMarkers(){
     return this.state.experienced.map((harassment) =>
       <MapView.Marker
+        key={harassment.id}
         coordinate={{
           latitude: harassment.latitude,
           longitude: harassment.longitude,
@@ -161,6 +171,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: '100%',
     width: '100%',
+    alignItems: 'center'
   },
   container: {
     position: 'absolute',
@@ -189,7 +200,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     backgroundColor: 'white',
     width: '90%',
-    height: '6%',
+    height: 40,
     top: 40,
     borderRadius: 3,
     shadowOpacity: 0.75,
