@@ -33,13 +33,18 @@ export default class MapScreen extends Component {
   }
 
   componentDidMount() {
+    this.getMapMarkers()
+  }
+
+  getMapMarkers() {
     axios.get('http://localhost:3000/reports')
     .then((response) => {
       this.setState({
-        witnessed: response.data.witnessed.map(parseCoordinatesToNumber),
-        experienced: response.data.experienced.map(parseCoordinatesToNumber) })
+        witnessed: response.data.witnessed.map(this.parseCoordinatesToNumber),
+        experienced: response.data.experienced.map(this.parseCoordinatesToNumber) })
     }
     )
+    .catch(error => console.log("Map Marker axios error: ", error))
   }
 
   callout() {
@@ -50,6 +55,7 @@ export default class MapScreen extends Component {
   }
 
   handleLocationInput(textInput) {
+    this.getMapMarkers();
     this.setState({
       locationInput: textInput
     });
@@ -58,12 +64,14 @@ export default class MapScreen extends Component {
   updateLocationCoordinates(response){
     if(response.data.results[0].geometry) {
       const info = response.data.results[0].geometry.location
-      this.setState({
+      const latDelta = Number(response.data.results[0].geometry.viewport.northeast.lat) - Number(response.data.results[0].geometry.viewport.southwest.lat)
+      const lngDelta = Number(response.data.results[0].geometry.viewport.northeast.lng) - Number(response.data.results[0].geometry.viewport.southwest.lng)
+       this.setState({
         locationCoordinates: {
           latitude: Number(info.lat),
           longitude: Number(info.lng),
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: latDelta,
+          longitudeDelta: lngDelta,
         }
       })
     } else {
@@ -79,7 +87,7 @@ export default class MapScreen extends Component {
 
   handleLocationChange(response){
     this.setState({
-      locationCoordiante: response
+      locationCoordinates: response
     })
   }
 
@@ -87,10 +95,8 @@ export default class MapScreen extends Component {
     return this.state.witnessed.map((harassment) =>
       <MapView.Marker
         coordinate={{
-          latitude: Number(harassment.latitude),
-          longitude: Number(harassment.longitude),
-          role: role,
-          date: date
+          latitude: harassment.latitude,
+          longitude: harassment.longitude,
         }}
       />
     );
@@ -120,14 +126,13 @@ export default class MapScreen extends Component {
         provider={ PROVIDER_GOOGLE }
         style={ styles.container }
         region={this.state.locationCoordinates}
-        onRegionChange={this.handleLocationChange}
+        onRegionChangeComplete={this.handleLocationChange}
         zoomEnabled={true}
         scrollEnabled={true}
       >
         {this.createWitnessedMarkers()}
         {this.createExperiencedMarkers()}
         </MapView>
-        <View style={styles.allNonMapThings}>
           <View style={styles.inputContainer}>
             <TextInput
               placeholder=" Where to?"
@@ -137,7 +142,6 @@ export default class MapScreen extends Component {
               onSubmitEditing={this.handleSubmit.bind(this)}
             />
           </View>
-
           <View style={styles.button} >
             <TouchableOpacity
               onPress={this.callout.bind(this)}
@@ -147,7 +151,6 @@ export default class MapScreen extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
       </View>
     );
   }
